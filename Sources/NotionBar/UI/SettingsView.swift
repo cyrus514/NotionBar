@@ -32,7 +32,22 @@ struct SettingsView: View {
     @ViewState private var notificationNote: String?
     @ViewState private var hotKeyNote: String?
 
+    /// The window never grows taller than this: on a small laptop screen the rest scrolls.
+    var maxHeight: CGFloat = 660
+
     var body: some View {
+        ScrollView(.vertical) {
+            content
+        }
+        .frame(width: 480, height: maxHeight)
+        .onAppear {
+            loginItem.refresh()
+            tasksDatabaseText = settings.tasksDatabaseID
+            stepsDatabaseText = settings.stepsDatabaseID
+        }
+    }
+
+    private var content: some View {
         VStack(alignment: .leading, spacing: 0) {
             section("notion") {
                 VStack(alignment: .leading, spacing: 8) {
@@ -164,10 +179,11 @@ struct SettingsView: View {
         .padding(.top, 8)
         .padding(.bottom, 20)
         .frame(width: 480)
-        .onAppear {
-            loginItem.refresh()
-            tasksDatabaseText = settings.tasksDatabaseID
-            stepsDatabaseText = settings.stepsDatabaseID
+        // Tucked in the top-right corner, level with the first heading.
+        .overlay(alignment: .topTrailing) {
+            CoffeeLink()
+                .padding(.top, 17)
+                .padding(.trailing, 20)
         }
     }
 
@@ -305,5 +321,35 @@ struct SettingsView: View {
             settings.hotKey = .off
             hotKeyNote = "\(choice.label) is taken by another app"
         }
+    }
+}
+
+/// A small "buy me a coffee" link, for anyone who'd like to thank the author.
+struct CoffeeLink: View {
+    @Environment(\.theme) private var theme
+    @ViewState private var hovering = false
+
+    var body: some View {
+        Button {
+            NSWorkspace.shared.open(Links.coffee)
+        } label: {
+            HStack(spacing: 5) {
+                Image(systemName: "cup.and.saucer.fill")
+                    .font(.system(size: 10, weight: .semibold))
+                    .foregroundStyle(Color(hex: 0xE6A700))
+                Text("buy me a coffee")
+                    .font(Mono.font(11))
+                    .foregroundStyle(hovering ? theme.text : theme.detail)
+                    .underline(hovering)
+            }
+            .padding(.horizontal, 7)
+            .padding(.vertical, 3)
+            .background(RoundedRectangle(cornerRadius: 5).fill(hovering ? theme.hover : .clear))
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+        .onHover { hovering = $0 }
+        .help("like NotionBar? buy its author a coffee · opens buymeacoffee.com")
+        .accessibilityLabel("Buy me a coffee")
     }
 }

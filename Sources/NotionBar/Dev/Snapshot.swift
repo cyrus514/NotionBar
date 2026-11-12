@@ -130,10 +130,10 @@ enum Snapshot {
                                                startPoint: .topLeading, endPoint: .bottomTrailing))
                 )
             case "settings":
-                size = NSSize(width: 480, height: 860)
+                size = NSSize(width: 480, height: 990)
                 let tokens = TokenStore(demo: true)
                 view = AnyView(
-                    Themed { SettingsView(actions: SettingsActions()) }
+                    Themed { SettingsView(actions: SettingsActions(), maxHeight: 990) }
                         .environmentObject(scene.settings)
                         .environmentObject(tokens)
                         .environmentObject(LoginItem())

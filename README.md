@@ -11,6 +11,8 @@
   <img alt="SwiftUI" src="https://img.shields.io/badge/UI-SwiftUI-0A84FF">
   <img alt="No dependencies" src="https://img.shields.io/badge/dependencies-none-2EA043">
   <a href="LICENSE"><img alt="MIT license" src="https://img.shields.io/badge/license-MIT-8250DF"></a>
+  <a href="https://github.com/cyrus514/NotionBar/releases/latest"><img alt="Latest release" src="https://img.shields.io/github/v/release/cyrus514/NotionBar?label=download&color=2EA043"></a>
+  <a href="https://buymeacoffee.com/cyrus_514"><img alt="Buy me a coffee" src="https://img.shields.io/badge/buy%20me%20a%20coffee-FFDD00?logo=buymeacoffee&logoColor=000000"></a>
 </p>
 
 <p align="center">
@@ -124,6 +126,18 @@ Launch at Login and Quit.
 - **Light and dark**, three text sizes, launch at login.
 
 ## Install
+
+### Download the app
+
+1. Download `NotionBar-1.0.0.zip` from the [latest release](https://github.com/cyrus514/NotionBar/releases/latest) and unzip it.
+2. Drag **NotionBar.app** into your Applications folder and open it.
+3. The first time, macOS will refuse to open it, because the app isn't notarized by Apple (that needs a
+   paid developer account). Open **System Settings → Privacy & Security**, scroll down to the message
+   about NotionBar, and click **Open Anyway**. You only have to do this once.
+
+It runs on macOS 14 or later, on Apple silicon and Intel Macs.
+
+### Or build it yourself
 
 You need macOS 14 or later and the Xcode Command Line Tools (`xcode-select --install`). Xcode itself is not required.
 
@@ -281,6 +295,12 @@ It never contains the token and doesn't record task names.
   without Xcode and has not been built in Xcode yet. If it complains, open `Package.swift` instead.
 
 </details>
+
+## Support
+
+NotionBar is free and open source. If it saves you some time and you'd like to say thanks:
+
+<a href="https://buymeacoffee.com/cyrus_514"><img alt="Buy me a coffee" src="https://img.shields.io/badge/Buy%20me%20a%20coffee-FFDD00?style=for-the-badge&logo=buymeacoffee&logoColor=000000"></a>
 
 ## Contributing
 
