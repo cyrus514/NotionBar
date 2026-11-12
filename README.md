@@ -129,11 +129,14 @@ Launch at Login and Quit.
 
 ### Download the app
 
-1. Download `NotionBar-1.0.0.zip` from the [latest release](https://github.com/cyrus514/NotionBar/releases/latest) and unzip it.
-2. Drag **NotionBar.app** into your Applications folder and open it.
+1. Download `NotionBar-1.0.0.dmg` from the [latest release](https://github.com/cyrus514/NotionBar/releases/latest) and open it.
+2. Drag **NotionBar** onto **Applications** in the window that appears, then open it from Applications.
 3. The first time, macOS will refuse to open it, because the app isn't notarized by Apple (that needs a
    paid developer account). Open **System Settings → Privacy & Security**, scroll down to the message
    about NotionBar, and click **Open Anyway**. You only have to do this once.
+4. Look for it in the menu bar. NotionBar has no Dock icon.
+
+<p align="center"><img src="docs/installer.png" width="560" alt="The installer window: the install steps as a checklist, with NotionBar and the Applications folder"></p>
 
 It runs on macOS 14 or later, on Apple silicon and Intel Macs.
 
@@ -252,7 +255,8 @@ Sources/NotionBar/
   Dev/        --selftest, --dump, --snapshot, the app icon, the scripted debug driver
   Resources/  JSON fixtures shaped like real Notion replies, AppIcon.icns
 Support/Info.plist     LSUIElement = YES (menu bar only, no Dock icon)
-scripts/               ui_test.sh, compare_with_plugin.py, make_fixtures.py, make_icon.sh
+scripts/               ui_test.sh, compare_with_plugin.py, make_fixtures.py, make_icon.sh,
+                       make_release.sh and make_dmg.sh (the installer disk image)
 ```
 
 ## Checking it works

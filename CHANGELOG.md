@@ -29,6 +29,7 @@ First public release.
 - Everything honours the Animations setting and Reduce Motion.
 
 ### For developers
-- Universal build (Apple silicon and Intel) attached to the release: `scripts/make_release.sh`.
+- Universal build (Apple silicon and Intel), packed as an installer disk image whose window is the
+  install steps written as a NotionBar task list: `scripts/make_release.sh`.
 - Demo mode on sample data (`./build.sh --demo`).
 - `--selftest`, a click-through UI test, a section-parity check, and a snapshot renderer.

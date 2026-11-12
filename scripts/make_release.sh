@@ -1,16 +1,15 @@
 #!/bin/bash
-# Builds the app for Apple silicon and Intel, and zips it for a GitHub release.
+# Builds the app for Apple silicon and Intel, and packs it into the installer disk image that goes
+# on a GitHub release.
 #
-#   scripts/make_release.sh        → build/NotionBar-<version>.zip
+#   scripts/make_release.sh        → build/NotionBar-<version>.dmg
 #
 # The app is signed for local use only ("ad hoc"), not notarized: people who download it
 # have to allow it once under System Settings → Privacy & Security.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
-VERSION="$(plutil -extract CFBundleShortVersionString raw Support/Info.plist)"
 APP="build/NotionBar.app"
-ZIP="build/NotionBar-$VERSION.zip"
 
 # Each processor gets its own build folder, so one build can't overwrite the other.
 echo "› compiling for Apple silicon…"
@@ -25,10 +24,5 @@ lipo -create "$ARM" "$INTEL" -output "$APP/Contents/MacOS/NotionBar"
 codesign --force --sign - "$APP" >/dev/null 2>&1
 codesign --verify --strict "$APP"
 
-rm -f "$ZIP"
-ditto -c -k --keepParent "$APP" "$ZIP"
-echo "✓ $ZIP"
-echo "  version:  $VERSION"
-echo "  runs on:  $(lipo -archs "$APP/Contents/MacOS/NotionBar")"
-echo "  size:     $(du -h "$ZIP" | cut -f1 | tr -d ' ')"
-echo "  sha256:   $(shasum -a 256 "$ZIP" | cut -d' ' -f1)"
+# The window, the picture and the disk icon are scripts/make_dmg.sh's job.
+scripts/make_dmg.sh
